@@ -1,0 +1,57 @@
+{
+  "WeaponDB": [
+    {
+      "itemDbID": "1",
+      "itemTemplateID": "2",
+      "name": "sword",
+      "description": "칼",
+      "count": "1",
+      "slot": "1",
+      "itemType": "1",
+      "weaponType": "2",
+      "attack": "5"
+
+    }
+  ],
+
+  "ArmorDB": [
+    {
+      "itemDbID": "2",
+      "itemTemplateID": "3",
+      "name": "shield",
+      "description": "방어구",
+      "count": "1",
+      "slot": "2",
+      "itemType": "2",
+      "armorType": "2",
+      "defense": "5"
+    }
+  ],
+
+  "ConsumableDB": [
+    {
+      "itemDbID": "3",
+      "itemTemplateID": "1",
+      "name": "apple",
+      "description": "사과",
+      "count": "5",
+      "slot": "4",
+      "itemType": "3",
+      "consumableType": "2",
+      "hp": "10",
+      "buffType": "0"
+    }
+  ],
+  "UseableDB": [
+    {
+      "itemDbID": "5",
+      "itemTemplateID": "6",
+      "name": "abc",
+      "description": "투척무기라고치자",
+      "count": "2",
+      "slot": "10",
+      "itemType": "4",
+      "useableType": "2"
+    }
+  ]
+}

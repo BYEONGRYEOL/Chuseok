@@ -1,0 +1,65 @@
+{
+  "EnemyReward": [
+    {
+      "enemyID": "1",
+      "enemyRewardData": [
+        {
+          "itemTemplateID": "1",
+          "count": "1",
+          "probability": "80"
+        },
+        {
+          "itemTemplateID": "2",
+          "count": "1",
+          "probability": "80"
+        },
+        {
+          "itemTemplateID": "3",
+          "count": "1",
+          "probability": "10"
+        }
+      ]
+    },
+    {
+      "enemyID": "2",
+      "enemyRewardData": [
+        {
+          "itemTemplateID": "1",
+          "count": "1",
+          "probability": "5"
+        },
+        {
+          "itemTemplateID": "2",
+          "count": "1",
+          "probability": "10"
+        },
+        {
+          "itemTemplateID": "3",
+          "count": "1",
+          "probability": "50"
+        }
+      ]
+    },
+    {
+      "enemyID": "3",
+      "enemyRewardData": [
+        {
+          "itemTemplateID": "5",
+          "count": "1",
+          "probability": "80"
+        },
+        {
+          "itemTemplateID": "6",
+          "count": "1",
+          "probability": "80"
+        },
+        {
+          "itemTemplateID": "3",
+          "count": "1",
+          "probability": "10"
+        }
+      ]
+    }
+
+  ]
+}

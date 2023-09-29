@@ -1,0 +1,3 @@
+﻿itemTemplateid,name,description,size,maxCount,itemType,consumableType,hp,buffType
+1,apple,사과,1,20,3,2,3,0
+5,potion,포션,1,20,3,1,10,0

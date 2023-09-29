@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da11476c358b4fd4f994edd4e9919fdc, type: 3}
+  m_Name: Trees2
+  m_EditorClassIdentifier: 
+  plantName: Trees2
+  plantStages:
+  - {fileID: 21300000, guid: f26925980c6c91b49b56e33ed1d82322, type: 3}
+  - {fileID: 21300000, guid: 879f9d5fcfe5e9a4f91fddffd1f74e96, type: 3}
+  - {fileID: 21300000, guid: 29b9f29d782a52d40966c31c00be20af, type: 3}
+  timeBtwStages: 3

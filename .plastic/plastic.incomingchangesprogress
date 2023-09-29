@@ -1,0 +1,36 @@
+[
+  {
+    "MountId": "56e62dd7-241f-41e9-8c6b-dd4ca4513e62",
+    "AncestorCsetIds": [
+      15
+    ],
+    "SourceCsetId": 16,
+    "DestinationCsetId": 15,
+    "FileConflicts": [
+      {
+        "Path": "/Assets/Resources/Prefabs/InGame/GT1Prefab.prefab",
+        "ItemId": 17379,
+        "ParentItemId": 17344,
+        "BaseRevId": 21287,
+        "SourceRevId": 22824,
+        "DestinationRevId": 21287
+      },
+      {
+        "Path": "/Assets/Resources/Prefabs/InGame/GT2Prefab.prefab",
+        "ItemId": 17381,
+        "ParentItemId": 17344,
+        "BaseRevId": 21288,
+        "SourceRevId": 22825,
+        "DestinationRevId": 21288
+      },
+      {
+        "Path": "/Assets/Scenes/SceneGame.unity",
+        "ItemId": 5865,
+        "ParentItemId": 5767,
+        "BaseRevId": 22815,
+        "SourceRevId": 22846,
+        "DestinationRevId": 22815
+      }
+    ]
+  }
+]

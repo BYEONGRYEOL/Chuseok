@@ -1,0 +1,26 @@
+{
+  "ConsumableInfo": [
+    {
+      "itemTemplateid": "1",
+      "name" : "apple",
+      "description": "사과",
+      "size": "1",
+      "maxCount": "20",
+      "itemType": "3",
+      "consumableType": "2",
+      "hp": "3",
+      "buffType": "0"
+    },
+    {
+      "itemTemplateid": "5",
+      "name": "potion",
+      "description": "포션",
+      "size": "1",
+      "maxCount": "20",
+      "itemType": "3",
+      "consumableType": "1",
+      "hp": "10",
+      "buffType": "0"
+    }
+  ]
+}

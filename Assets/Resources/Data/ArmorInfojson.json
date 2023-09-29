@@ -1,0 +1,25 @@
+{
+  "ArmorInfo": [
+    
+    {
+      "itemTemplateid": "3",
+      "name": "shield",
+      "description": "방어구",
+      "size": "1",
+      "maxCount": "1",
+      "itemType": "2",
+      "armorType": "2",
+      "defense": "5"
+    },
+    {
+      "itemTemplateid": "4",
+      "name": "shoes",
+      "description": "신발",
+      "size": "1",
+      "maxCount": "1",
+      "itemType": "2",
+      "armorType": "3",
+      "defense": "10"
+    }
+  ]
+}

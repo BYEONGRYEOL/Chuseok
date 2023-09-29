@@ -1,0 +1,3 @@
+﻿itemTemplateid,name,description,size,maxCount,itemType,armorType,defense
+3,shield,방어구,1,1,2,2,5
+4,shoes,신발,1,1,2,3,10

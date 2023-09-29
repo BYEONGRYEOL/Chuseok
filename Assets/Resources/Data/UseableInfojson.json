@@ -1,0 +1,13 @@
+{
+  "UseableInfo": [
+    {
+      "itemTemplateid": "6",
+      "name": "abc",
+      "description": "투척무기라고치자",
+      "size": "2",
+      "maxCount": "20",
+      "itemType": "4",
+      "useableType": "2"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "WeaponInfo": [
+    {
+      "itemTemplateid": "2",
+      "name": "sword",
+      "description": "칼",
+      "size": "1",
+      "maxCount": "1",
+      "itemType": "1",
+      "weaponType": "2",
+      "attack": "5"
+    }
+  ]
+}

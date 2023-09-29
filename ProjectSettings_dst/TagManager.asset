@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - grass
+  - Obstacle
+  - Enemy
+  - EnemyHitBox
+  - PlayerHitBox
+  - KeyBind
+  - Canvas_Inventory
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Enemy
+  - Water
+  - UI
+  - object
+  - Player
+  - PlayerHitBox
+  - EnemyHitBox
+  - KeyBind
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 170222587
+    locked: 0
+  - name: 1f
+    uniqueID: 3982652737
+    locked: 0
+  - name: 2f
+    uniqueID: 2603516871
+    locked: 0
+  - name: 3f
+    uniqueID: 1486850789
+    locked: 0
+  - name: 4f
+    uniqueID: 144209091
+    locked: 0
+  - name: 5f
+    uniqueID: 3958107789
+    locked: 0
+  - name: Articles
+    uniqueID: 2826969733
+    locked: 0
+  - name: New Layer 8
+    uniqueID: 3643364519
+    locked: 0
+  - name: Player
+    uniqueID: 4057279747
+    locked: 0

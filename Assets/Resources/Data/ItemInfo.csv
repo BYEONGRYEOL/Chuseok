@@ -1,0 +1,7 @@
+﻿itemTemplateid,name,description,size,maxCount,resourcePath,itemType
+1,apple,사과,1,20,Sprites/Fantastic UI Starter Pack_12,3
+2,sword,칼,1,1,Sprites/Fantastic UI Starter Pack_2,1
+3,shield,방어구,1,1,Sprites/Fantastic UI Starter Pack_14,2
+4,shoes,신발,1,1,Sprites/Fantastic UI Starter Pack_7,2
+5,potion,포션,1,20,Sprites/Fantastic UI Starter Pack_8,3
+6,abc,투척무기,2,20,Sprites/Fantastic UI Starter Pack_9,4

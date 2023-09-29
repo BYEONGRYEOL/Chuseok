@@ -1,0 +1,70 @@
+{
+  "PlayerStat"
+    : [
+    {
+      "level": "1",
+      "maxHp": "100",
+      "str": "10",
+      "dex": "10",
+      "intel": "10",
+      "defense": "0",
+      "accuracy": "0.1",
+      "dodge": "0.1",
+      "totalExp": "0"
+    },
+    {
+      "level": "2",
+      "maxHp": "110",
+      "str": "11",
+      "dex": "10",
+      "intel": "10",
+      "defense": "0",
+      "accuracy": "0.1",
+      "dodge": "0.1",
+      "totalExp": "10"
+    },
+    {
+      "level": "3",
+      "maxHp": "120",
+      "str": "12",
+      "dex": "10",
+      "intel": "10",
+      "defense": "1",
+      "accuracy": "0.1",
+      "dodge": "0.1",
+      "totalExp": "20"
+    },
+    {
+      "level": "4",
+      "maxHp": "130",
+      "str": "13",
+      "dex": "10",
+      "intel": "10",
+      "defense": "1",
+      "accuracy": "0.1",
+      "dodge": "0.1",
+      "totalExp": "30"
+    },
+    {
+      "level": "5",
+      "maxHp": "140",
+      "str": "14",
+      "dex": "10",
+      "intel": "10",
+      "defense": "2",
+      "accuracy": "0.1",
+      "dodge": "0.1",
+      "totalExp": "50"
+    },
+    {
+      "level": "6",
+      "maxHp": "150",
+      "str": "15",
+      "dex": "10",
+      "intel": "10",
+      "defense": "2",
+      "accuracy": "0.15",
+      "dodge": "0.11",
+      "totalExp": "80"
+    }
+  ]}
