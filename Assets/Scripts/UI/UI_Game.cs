@@ -10,7 +10,6 @@ namespace Isometric.UI
     public class UI_Game : UI_Scene
     {
 
-        public UI_Inventory inventory;
         public UI_Option option;
         public PlayerStat stat;
         public Image hp;
@@ -26,16 +25,8 @@ namespace Isometric.UI
         {
             Btn_Action_1,
             Btn_Action_2,
-            Btn_Action_3/*,
+            Btn_Action_3
 
-            Btn_Action_4,
-            Btn_Action_1,
-            Btn_Action_1,
-            Btn_Action_1,
-            Btn_Action_1,
-            Btn_Action_1,
-            Btn_Action_1,
-*/
         }
         enum Images
         {
@@ -66,8 +57,6 @@ namespace Isometric.UI
         {
             base.Init();
             
-            inventory = GetComponentInChildren<UI_Inventory>();
-            //inventory.gameObject.SetActive(false);
 
             stat = FindObjectOfType<PlayerStat>().GetComponent<PlayerStat>();
             

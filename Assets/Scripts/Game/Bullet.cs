@@ -5,7 +5,7 @@ using UnityEngine.Scripting.APIUpdating;
 namespace Isometric
 {
 
-    public class Bullet
+    public class Bullet : MonoBehaviour
     {
         public float xlowerBound = -40;
         public float xUpperBound = 40;
@@ -29,7 +29,7 @@ namespace Isometric
         public void OnEnable()
         {
             isAble = true;
-            float dirx = Managers.
+            
         }
         public void Disable()
         {

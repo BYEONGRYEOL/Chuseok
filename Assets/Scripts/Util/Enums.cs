@@ -85,7 +85,8 @@ public class Enums
         WalkLayer = 1,
         AttackLayer = 2,
         RunLayer = 3,
-        HitDamageLayer = 4
+        HitDamageLayer = 4,
+        InterActionLayer = 5
     }
     public enum Layer
     {

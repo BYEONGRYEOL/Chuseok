@@ -32,14 +32,7 @@ namespace Isometric.Data
         public GameData gameData;
 
         // CSV리소스 데이터들을 관리하기 위함
-        public Dictionary<int, PlayerStatData> PlayerStatDict { get; private set; } = new Dictionary<int, PlayerStatData>();
-        public Dictionary<int, EnemyStatData> EnemyStatDict { get; private set; } = new Dictionary<int, EnemyStatData>();
-        public Dictionary<int, ItemInfo> ItemInfoDict { get; private set; } = new Dictionary<int, ItemInfo>();
-        public Dictionary<int, WeaponInfo> WeaponInfoDict { get; private set; } = new Dictionary<int, WeaponInfo>();
-        public Dictionary<int, ArmorInfo> ArmorInfoDict { get; private set; } = new Dictionary<int, ArmorInfo>();
-        public Dictionary<int, ConsumableInfo> ConsumableInfoDict { get; private set; } = new Dictionary<int, ConsumableInfo>();
-        public Dictionary<int, UseableInfo> UseableInfoDict { get; private set; } = new Dictionary<int, UseableInfo>();
-        public Dictionary<int, ItemData> ItemDBDict { get; private set; } = new Dictionary<int, ItemData>();
+       
 
 
         public void Init()
@@ -48,16 +41,7 @@ namespace Isometric.Data
             gameData = new GameData();
             //실행되자마자 CSV 파일을 참고하여 Json 파일이 있는지 없는지 체크 후 없으면 생성
 
-            //CSV 파일로 관리하는 리소스데이터에 대하여 실행
-            MakeJson(Datas.EnemyStat.ToString());
-            MakeJson(Datas.PlayerStat.ToString());
-            MakeJson(Datas.ItemInfo.ToString());
-            MakeJson(Datas.WeaponInfo.ToString());
-            MakeJson(Datas.ArmorInfo.ToString());
-            MakeJson(Datas.ConsumableInfo.ToString());
-            MakeJson(Datas.UseableInfo.ToString());
-
-
+            
 
 
             //json 파일이 다 만들어지기 전까진 로딩 씬에서 넘어가지 않았으면함
@@ -68,56 +52,11 @@ namespace Isometric.Data
         // 해당 스테이지에 필요한 로딩을 할 때 스테이지 게임씬으로 넘어가기전에 꼭 만들어야 한다.
         // 코루틴으로 할지 액션 으로할지 아무튼 비동기식 이 필요한데 좀 어렵네
 
-        public enum Datas
-        {
-            PlayerStat,
-            EnemyStat,
-            ItemInfo,
-            WeaponInfo,
-            ArmorInfo,
-            ConsumableInfo,
-            UseableInfo,
-            ItemDB
-        }
         
-        //json 파일 생성기
-        public bool MakeJson(string csvName)
-        {
-            return CSVtoJson.ConvertCsvFileToJsonObject(csvName);
-        }
+        
+        
 
-        public bool IsJsonLoaded()
-        {
-            List<bool> a = new List<bool>();
-            foreach (Datas datas in Enum.GetValues(typeof(Datas)))
-            {
-                a.Add(MakeJson(datas.ToString()));
-            }
-            if (a.Contains(false))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public void MakeJsontoDict()
-        {
-            Debug.Log("Datamanager : MakeJsontoDict 실행");
-            PlayerStatDict = LoadJson<PlayerStatLoader, int, PlayerStatData>("PlayerStatjson").MakeDict();
-            EnemyStatDict = LoadJson<EnemyStatLoader, int, EnemyStatData>("EnemyStatjson").MakeDict();
-            ItemInfoDict = LoadJson<ItemInfoData, int, ItemInfo>("ItemInfojson").MakeDict();
-            WeaponInfoDict = LoadJson<WeaponInfoData, int, WeaponInfo>("WeaponInfojson").MakeDict();
-            ArmorInfoDict = LoadJson<ArmorInfoData, int, ArmorInfo>("ArmorInfojson").MakeDict();
-            ConsumableInfoDict = LoadJson<ConsumableInfoData, int, ConsumableInfo>("ConsumableInfojson").MakeDict();
-            UseableInfoDict = LoadJson<UseableInfoData, int, UseableInfo>("UseableInfojson").MakeDict();
-            ItemDBDict = LoadJson<ItemLoader, int, ItemData>("ItemDBjson").MakeDict();
-
-            Debug.Log("ItemDBDict 로딩 :: " + ItemDBDict.Count);
-        }
-
+        
         public void MakeJsontoList()
         {
             // 리스트 형식의 게임 리소스데이터를 들고있으려면 이걸실행

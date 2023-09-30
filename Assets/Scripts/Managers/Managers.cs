@@ -21,9 +21,7 @@ namespace Isometric
         DataManager _data = new DataManager();
         PoolManager _pool = new PoolManager();
         TimeManager _time = new TimeManager();
-        InventoryManager _inven = new InventoryManager();
         ObjectManager _object = new ObjectManager();
-        ItemManager _item = new ItemManager();
         RandomNumberManager _random = new RandomNumberManager();
         public static ObjectManager Object { get { return Instance._object; } }
         public static KeyBindManager KeyBind { get { return Instance._keyBind; } }
@@ -34,8 +32,6 @@ namespace Isometric
         public static DataManager Data { get { return Instance._data; } }
         public static PoolManager Pool { get { return Instance._pool; } }
         public static TimeManager Time { get { return Instance._time; } }
-        public static InventoryManager Inven { get { return Instance._inven; } }
-        public static ItemManager Item { get { return Instance._item; } }
         public static RandomNumberManager Random { get { return Instance._random; } }
         void Awake()
         {
@@ -74,15 +70,11 @@ namespace Isometric
 
                 instance._object.Init();
 
-                instance._item.Init();
 
                 instance._random.Init();
             }
         }
-        public static void InitWhenLoading()
-        {
-            instance._inven.Init();
-        }
+        
         public static void Clear()
         {
             Input.Clear();

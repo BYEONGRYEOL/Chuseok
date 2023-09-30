@@ -57,7 +57,9 @@ public abstract class CharacterController : MonoBehaviour
                     ActivateAnimationLayer(Enums.AnimationLayer.HitDamageLayer);
                     Enter_TakeDamage();
                     break;
-
+                case Enums.CharacterState.Interaction:
+                    ActivateAnimationLayer(Enums.AnimationLayer.InterActionLayer);
+                    break;
                 //우선은 플레이어 전용
 
 
