@@ -47,12 +47,8 @@ public class FadeInOut : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("ontrigger exit");
-
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("player 충돌 인식끝");
-
             FadeIn();
 
           

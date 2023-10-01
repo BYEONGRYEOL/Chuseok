@@ -8,6 +8,7 @@ TagManager:
   - Canvas_Inventory
   - KeyBind
   - Obstacle
+  - Bullet
   layers:
   - Default
   - TransparentFX

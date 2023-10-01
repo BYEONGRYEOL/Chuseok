@@ -14,7 +14,6 @@ namespace Isometric
         private static PlayerController instance;
         public static PlayerController Instance { get { return instance; } }
 
-        public PlayerStat stat;
 
         // 점프 정도
         [SerializeField]
@@ -36,7 +35,7 @@ namespace Isometric
         GameObject target;
         protected float interActionDuration;
 
-        Coroutine interActionCo;
+        Coroutine interActionRoutine;
         float moveSpeed = 2f;
         #endregion
 
@@ -69,7 +68,7 @@ namespace Isometric
 
             //Debug.Log(Managers.KeyBind.KeyBinds["INTERACTION"]);
 
-            interActionDuration = 0.1f;
+            interActionDuration = 0.5f;
 
             myRigid2D = GetComponent<Rigidbody2D>();
             Time.timeScale = 1f;
@@ -127,9 +126,7 @@ namespace Isometric
                 case Enums.CharacterState.Die:
                     Update_Die();
                     break;
-                case Enums.CharacterState.Climbing:
-                    Update_Climbing();
-                    break;
+                
                 case Enums.CharacterState.TakeDamage:
                     Update_TakeDamage();
                     break;
@@ -169,7 +166,7 @@ namespace Isometric
             myAnimator.SetFloat("x", direction.x);
             myAnimator.SetFloat("y", direction.y);
 
-            myMove(stat.MoveSpeed);
+            myMove(moveSpeed);
 
             if (direction.sqrMagnitude == 0)
             {
@@ -194,13 +191,10 @@ namespace Isometric
         
         private void Update_InterAction()
         {
-
+            myAnimator.SetFloat("x", direction.x);
+            myAnimator.SetFloat("y", direction.y);
         }
-        
-        private void Update_Climbing()
-        {
-
-        }
+       
         #endregion
 
         
@@ -215,14 +209,7 @@ namespace Isometric
                 Running();
             
             
-            foreach (string action in Managers.KeyBind.ActionBinds.Keys)
-            {
-                if (Input.GetKeyDown(Managers.KeyBind.ActionBinds[action]))
-                {
-                    //UI_Ingame_R.Instance.ClickActionButton(action);
-                    Debug.Log(action + "키입력받음");
-                }
-            }
+            
         }
         private void OnMouse()
         {
@@ -230,10 +217,10 @@ namespace Isometric
                 return;
             //공격
             //마우스 클릭을 인식하는 경우 항상 UI elements 클릭시와 구별할 수 있도록 코드 추가
-            if (Input.GetMouseButtonUp(0))
-            {
-                StopInterAction();
-            }
+            //if (Input.GetMouseButtonUp(0))
+            //{
+            //    StopInterAction();
+            //}
             if (Input.GetMouseButtonDown(0))
             {
                 InterAction();
@@ -256,7 +243,7 @@ namespace Isometric
 
         private IEnumerator InterActionAnimation()
         {
-            State = Enums.CharacterState.Attack_1;
+            State = Enums.CharacterState.Interaction;
 
             myAnimator.SetBool("isBowing", true);
 
@@ -324,31 +311,24 @@ namespace Isometric
             interActionBox.gameObject.SetActive(false);
         }
 
-        public void OnADHit(EnemyController hittedEnemy)
-        {
-            Debug.Log("플레이어가 적 공격 판정");
-            hittedEnemy.GetComponent<EnemyController>().GetAttacked(stat);
-        }
+        
         #endregion
 
         #region GetAttacked
-        public void GetAttacked(Stat attacker)
-        {
-            stat.GetAttacked(attacker);
-            State = Enums.CharacterState.TakeDamage;
-        }
+        
 
         #endregion
 
         private void InterAction()
         {
             // 이동, 뛰기, 기본, 상태일때만 되는거야
-            if (State != Enums.CharacterState.Idle && State != Enums.CharacterState.Move && State!= Enums.CharacterState.Run)
+            if (State != Enums.CharacterState.Idle && State != Enums.CharacterState.Move &&  State!= Enums.CharacterState.Run)
                 return;
 
             State = Enums.CharacterState.Interaction;
 
-            interActionCo = StartCoroutine(InterActionAnimation());
+            if(interActionRoutine == null)
+                interActionRoutine = StartCoroutine(InterActionAnimation());
         }
         
         private void Running()
@@ -371,12 +351,13 @@ namespace Isometric
 
         private void StopInterAction()
         {
-            if (attackRoutine != null)
+            if (interActionRoutine != null)
             {
-                StopCoroutine(attackRoutine);
-                myAnimator.SetBool("isAttacking", false);
-                State = Enums.CharacterState.Idle;
+                StopCoroutine(interActionRoutine);
             }
+            myAnimator.SetBool("isBowing", false);
+            State = Enums.CharacterState.Idle;
+            interActionRoutine = null;
         }
 
 

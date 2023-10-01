@@ -17,9 +17,14 @@ namespace Isometric
         {
             random = new Random();
         }
-        public float getRandomFloat()
+        public float getRandomFloat(int max)
         {
-            return (float)random.NextDouble();
+            return (float)random.NextDouble() * max;
+        }
+
+        public int getRandomInt(int min = 0, int max = 100)
+        {
+            return random.Next(min, max);
         }
     }
 

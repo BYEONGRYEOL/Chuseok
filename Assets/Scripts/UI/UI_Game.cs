@@ -11,7 +11,6 @@ namespace Isometric.UI
     {
 
         public UI_Option option;
-        public PlayerStat stat;
         public Image hp;
         public TextMeshProUGUI hp_text;
         private float currentFill;
@@ -58,7 +57,6 @@ namespace Isometric.UI
             base.Init();
             
 
-            stat = FindObjectOfType<PlayerStat>().GetComponent<PlayerStat>();
             
             Bind<Button>(typeof(Buttons));
             Bind<GameObject>(typeof(GameObjects));
@@ -73,8 +71,6 @@ namespace Isometric.UI
 
         private void Update_HPBar()
         {
-            hp_text.text = stat.Hp + "/" + stat.MaxHp;
-            currentFill = stat.Hp / (float)stat.MaxHp;
             
             if (currentFill != hp.fillAmount)
             {

@@ -59,6 +59,7 @@ public abstract class CharacterController : MonoBehaviour
                     break;
                 case Enums.CharacterState.Interaction:
                     ActivateAnimationLayer(Enums.AnimationLayer.InterActionLayer);
+                    myAnimator.SetBool("isBowing", true);
                     break;
                 //우선은 플레이어 전용
 

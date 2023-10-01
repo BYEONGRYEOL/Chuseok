@@ -110,7 +110,7 @@ MonoBehaviour:
   jumpForce: 0
   crouchPosY: 0
   theCamera: {fileID: 0}
-  attackBox_Tran: {fileID: 868250470233197950}
+  interActionBox: {fileID: 868250470233197950}
 --- !u!114 &7438106267294337020
 MonoBehaviour:
   m_ObjectHideFlags: 0

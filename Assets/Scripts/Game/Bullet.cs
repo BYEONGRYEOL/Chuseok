@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 namespace Isometric
 {
-
     public class Bullet : MonoBehaviour
     {
         public float xlowerBound = -40;
@@ -37,23 +36,18 @@ namespace Isometric
         }
         void Update()
         {
-
             if (IsAble)
             {
                 Move();
-
             }
         }
-        public void CheckInMap()
-        {
-            IsAble = isInMap();
-        }
+        
         private void Move()
         {
 
             this.gameObject.transform.position += direction * speed;
         }
-        private bool isInMap()
+        public bool IsInMap()
         {
             float x = this.gameObject.transform.position.x;
             float y = this.gameObject.transform.position.y;

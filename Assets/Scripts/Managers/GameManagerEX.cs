@@ -24,16 +24,7 @@ namespace Isometric
         private void OnDestroy(){if (instance == this){instance = null;}}
         */
         // -16 ~ 16   0 ~ 16    y >= 1/2x and y < 16 - 1/2 x
-        public GameObject bullet;
-        [SerializeField] private float minX = -3f;
-        [SerializeField] private float maxX = 3f;
-        [SerializeField] private float minY = 1f;
-        [SerializeField] private float maxY = 4f;
-        [SerializeField] private float spawnTime_min = 2f;
-        [SerializeField] private float spawnTime_Max = 10f;
-
-        [SerializeField] private List<int> spawnables = new List<int>();
-        Dictionary<int, bool> isspawning = new Dictionary<int, bool>();
+        
 
         private GameObject myPlayer;
         Coroutine _timeCoroutine = null;
@@ -85,11 +76,6 @@ namespace Isometric
                 (startPosition.y - endPosition.y) / 2 + startPosition.y);
 
 
-            if (Managers.Data.EnemyStatDict.ContainsKey(id))
-            {
-                // 적이 죽어서 아이템을 떨궈야 하는 경우
-                // 확률 등을 생각해서 아이템을 해당 위치에 떨궈야겠다.
-            }
         }
         private void ClickTarget()
         {
@@ -155,17 +141,7 @@ namespace Isometric
             InitTimeState();
             CheckClock();
 
-            spawnables.Add(2);
-            spawnables.Add(107);
-            foreach(int i in spawnables)
-            {
-                isspawning.Add(i, false);
-            }
-
-            bullet = Resources.Load<GameObject>("Prefabs/InGame/Bullet");
-            Managers.Pool.CreatePool(bullet, 100);
             
-
         }
         public void SetUI()
         {
@@ -177,19 +153,7 @@ namespace Isometric
                 return;
             }
 
-            UI_Inventory inventory = gameUI.inventory;
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                if (inventory.isActiveAndEnabled)
-                {
-                    inventory.gameObject.SetActive(false);
-                }
-                else
-                {
-                    inventory.gameObject.SetActive(true);
-                    inventory.RefreshSlot();
-                }
-            }
+            
         }
 
         #endregion
@@ -198,68 +162,8 @@ namespace Isometric
         {
             ClickTarget();
             SetUI();
-            SpawnCheck();
-            BulletPooling();
         }
 
-        void BulletPooling()
-        {
-            Managers.Pool.Pop(bullet);
-            
-            
-        }
-
-        #region 적 스폰
-
-        public void SpawnCheck()
-        {
-            foreach(int i in spawnables)
-            {
-                if(!IsSpawning(i) && Managers.Object.ObjectSpawnLimit[i] > Managers.Object.Count(i))
-                {
-                    float spawntime = UnityEngine.Random.Range(spawnTime_min, spawnTime_Max);
-                    StartCoroutine(SpawnEnemy(i, spawntime));
-                }
-            }
-        }
-        private bool IsSpawning(int key, bool? spawning = null)
-        {
-            if(spawning == null)
-            {
-                return isspawning[key];
-            }
-            
-            isspawning[key] = (bool)spawning;
-
-            return (bool)spawning;
-        }
-
-        private IEnumerator SpawnEnemy(int key, float spawntime)
-        {
-            IsSpawning(key, spawning: true);
-
-            yield return new WaitForSeconds(spawntime);
-            
-            string name = Managers.Data.EnemyStatDict[key].name;
-            GameObject go = Managers.Resource.Instantiate("Ingame/" + name);
-
-            Vector3 randPos = new Vector3(0,0,0);
-            int limit = 20;
-            while (limit > 0)
-            {
-                float randomX = UnityEngine.Random.Range(minX, maxX);
-                float randomY = UnityEngine.Random.Range(minY, maxY);
-
-                randPos = new Vector3(randomX, randomY, 0);
-                
-                limit -= 1;
-            }
-            go.transform.position = randPos;
-            Managers.Object.Add(key, go);
-            IsSpawning(key, spawning: false);
-
-        }
-        #endregion
         #region 시간관련
 
         public void CheckClock()

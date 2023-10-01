@@ -10,10 +10,9 @@ namespace Isometric
         // Start is called before the first frame update
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("EnemyHitBox"))
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Grandma"))
             {
-                EnemyController hittedenemy = collision.GetComponentInParent<EnemyController>();
-                GetComponentInParent<PlayerController>().OnADHit(hittedenemy);
+                Grandma grandma = collision.GetComponentInParent<Grandma>();
                 
             }
 
