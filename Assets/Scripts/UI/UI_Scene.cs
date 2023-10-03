@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Isometric.UI
 {
+    // 모든 씬 UI들의 부모 클래스
     public class UI_Scene : UI_Base
     {
         private static UI_Scene instance;

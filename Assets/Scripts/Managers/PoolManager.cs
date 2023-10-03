@@ -7,10 +7,9 @@ namespace Isometric
 { 
     public class PoolManager
     {
-        //pooling 할 오브젝트의 종류만큼의 Pool Class가 존재할거야
         class Pool
         {
-            //어떤 종류의 오브젝트를 담을 것인지?
+            // 어떤 오브젝트를 
             public GameObject Original { get; private set; }
             //어디에 담을건지
             public Transform Root { get; set; }
@@ -31,7 +30,7 @@ namespace Isometric
                 }
             }
 
-            // 게임오브젝트를 생성!
+            // 게임오브젝트를 실제로 생성
             Poolable Create()
             {
                 GameObject go = Object.Instantiate<GameObject>(Original);
@@ -44,7 +43,7 @@ namespace Isometric
             {
                 if(poolable == null)
                 {
-                    Debug.Log(poolable + "is null");
+                    //Debug.Log(poolable + "is null");
                     return;
                 }
 
@@ -75,6 +74,7 @@ namespace Isometric
                     poolable.transform.parent = Managers.Scene.CurrentScene.transform;
                 }
                 // parent 를 null 로 설정해 DDOL이 아닌 그냥 씬에 부모오브젝트 없이 존재할 수 있음
+                // DontdestroyOnLoad에 있었다면, 먼저 DontdestroyOnLoad가 아닌 씬의 어던 오브젝트의 자식으로 붙였다가 떼야 dontdestroyonload가 해제된다.
                 poolable.transform.parent = parent;
                 poolable.isUsing = true;
 
@@ -82,19 +82,21 @@ namespace Isometric
             }
         }
 
+        // 풀 종류별 관리
         Dictionary<string, Pool> poolDict = new Dictionary<string, Pool>();
 
         Transform _root;
 
         public void Init()
         {
-            if(_root = null)
+            if(_root == null)
             {
-                Debug.Log("이거왜실행한돼");
                 _root = new GameObject { name = "@Pool" }.transform;
                 Object.DontDestroyOnLoad(_root);
             }
         }
+
+        // 현재 개발자가 생성하기로 한 object가 pooling 가능하며, 아직 pool이 만들어지지 않은경우 Pool 생성
 
         public void CreatePool(GameObject original, int count = 10)
         {
@@ -104,6 +106,8 @@ namespace Isometric
 
             poolDict.Add(original.name, pool);
         }
+
+        // 게임 씬에 있다가 쓸모없어진 poolable 객체 다시 pool에 push
         public void Push(Poolable poolable)
         {
 
@@ -118,6 +122,7 @@ namespace Isometric
             poolDict[name].Push(poolable);
         }
 
+        //게임씬에서 사용하기위해 필요한 object를 pop, 만약 그러한 pool이 존재하지 ㅇ낳았다면 pool을 생성한다.
         public Poolable Pop(GameObject original, Transform parent = null)
         {
             if(poolDict.ContainsKey(original.name) == false)
@@ -129,7 +134,7 @@ namespace Isometric
 
         public GameObject GetOriginal(string name)
         {
-            Debug.Log(poolDict);
+            //Debug.Log(poolDict);
             if (poolDict.ContainsKey(name))
             {
                 if (poolDict[name].Original == null)

@@ -9,7 +9,7 @@ using Random = System.Random;
 
 namespace Isometric
 {
-
+    // 굳이 이렇게 난수를 생성하는 애를 매니저로까지 쓰진 않아도 될듯.
     public class RandomNumberManager
     {
         public Random random;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Isometric.UI;
 using Isometric.Data;
+using Isometric.Utility;
 
 namespace Isometric
 {
@@ -10,10 +11,9 @@ namespace Isometric
     {
 
         static Managers instance;
-        static Managers Instance { get { Init(); return instance; } }
+        static Managers Instance { get { return instance; } }
 
-
-        KeyBindManager _keyBind = new KeyBindManager();
+        //MonoBehaviour가 필요없는 다른 매니저 클래스들을 한번에 모두 관리, 전체 매니저 클래스 모두가 싱글톤으로 선언된것과 같은 느낌이다.
         InputManager _input = new InputManager();
         ResourceManager _resource = new ResourceManager();
         UIManager _ui = new UIManager();
@@ -21,10 +21,10 @@ namespace Isometric
         DataManager _data = new DataManager();
         PoolManager _pool = new PoolManager();
         TimeManager _time = new TimeManager();
-        ObjectManager _object = new ObjectManager();
         RandomNumberManager _random = new RandomNumberManager();
-        public static ObjectManager Object { get { return Instance._object; } }
-        public static KeyBindManager KeyBind { get { return Instance._keyBind; } }
+        SoundManager _sound = new SoundManager();
+
+
         public static InputManager Input { get { return Instance._input; } }
         public static ResourceManager Resource { get { return Instance._resource; } }
         public static UIManager UI { get { return Instance._ui; } }
@@ -33,10 +33,12 @@ namespace Isometric
         public static PoolManager Pool { get { return Instance._pool; } }
         public static TimeManager Time { get { return Instance._time; } }
         public static RandomNumberManager Random { get { return Instance._random; } }
+        public static SoundManager Sound { get { return Instance._sound; } }
+
         void Awake()
         {
             Init();
-            Debug.Log("Managers :: Awake function 실행?");
+            //Debug.Log("Managers :: Awake function 실행?");
         }
 
         void Update()
@@ -46,11 +48,12 @@ namespace Isometric
             _time.OnUpdate();
         }
 
-        static void Init()
+        public static void Init()
         {
-            // 씬에 Manager 게임 오브젝트가 없다면
+            //싱글톤
             if(instance == null)
             {
+                // 씬에 @Managers 게임오브젝트가 없다면 생성, 있다면, Dontdetroyonload 등록
                 GameObject go = GameObject.Find("@Managers");
                 if(go == null)
                 {
@@ -61,17 +64,12 @@ namespace Isometric
                 DontDestroyOnLoad(go);
                 instance = go.GetComponent<Managers>();
 
-                //Managers 스크립트가 초괴화될때는
+                //이 클래스가 초기화될때 들고잇는 다른 매니저클래스들도 초기화
                 instance._pool.Init();
-                
                 instance._data.Init();
-                
-                instance._keyBind.Init();
-
-                instance._object.Init();
-
-
                 instance._random.Init();
+                instance._sound.Init();
+
             }
         }
         

@@ -36,7 +36,7 @@ namespace Isometric.Data
             string path = GetSaveFilename(filename);
             //SAVEFILE 생성
             FileStream filestream = new FileStream(path, FileMode.Create);
-            Debug.Log(path);
+            //Debug.Log(path);
             //생성한 SaveFile에 saveData를 작성하는 StreamWriter를 선언, 이전에 json데이터로 변경한 json 문자열을 쓴다. (json 문자열은 Dictionary 내용을 string 형식으로 적은것과 비슷함)
             using (StreamWriter writer = new StreamWriter(filestream))
             {
@@ -65,7 +65,7 @@ namespace Isometric.Data
                     }
                     else
                     {
-                        Debug.Log("Scirpt JsonSaver Function Load : Invalid hashcode");
+                        //Debug.Log("Scirpt JsonSaver Function Load : Invalid hashcode");
                     }
                 }
                 return true;

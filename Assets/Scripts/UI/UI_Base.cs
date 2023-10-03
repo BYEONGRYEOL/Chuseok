@@ -38,11 +38,12 @@ namespace Isometric.UI
                 }
                 if (temp_objects[i] == null)
                 {
-                    Debug.Log($"Failed to bind :: {names[i]}");
+                    //Debug.Log($"Failed to bind :: {names[i]}");
                 }
             }
         }
 
+        //지정해주는 UIEvent에 맞게 동적으로 Event를 등록해주는 함수
         public static void BindEvent(GameObject go, Action<PointerEventData> action, Enums.UIEvent type = Enums.UIEvent.Click)
         {
             UI_EventHandler myEvent = Util.GetOrAddComponent<UI_EventHandler>(go);

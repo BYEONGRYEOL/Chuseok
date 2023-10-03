@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Isometric.UI;
+using Isometric.Utility;
+
 namespace Isometric
 {
 
@@ -13,6 +15,7 @@ namespace Isometric
 
             Managers.UI.ShowSceneUI<UI_Game>();
             SceneType = Enums.Scene.SceneGame;
+            
         }
         public override void Clear()
         {
@@ -20,15 +23,9 @@ namespace Isometric
         }
         public void SetUI()
         {
-
             UI_Game gameUI = Managers.UI.SceneUI as UI_Game;
             if (gameUI == null)
-            {
-                //캐스팅 실패 -> 현재 ui가 인게임ui가 아님을 이야기하는것
                 return;
-            }
-
-
         }
         // Start is called before the first frame update
         void Start()

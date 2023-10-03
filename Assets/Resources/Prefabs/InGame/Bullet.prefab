@@ -103,8 +103,7 @@ MonoBehaviour:
   xUpperBound: 40
   ylowerBound: -10
   yUpperBound: 40
-  speed: 1
-  direction: {x: 1, y: 0, z: 0}
+  isAble: 1
 --- !u!114 &8192112602552707126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +127,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

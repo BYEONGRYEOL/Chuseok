@@ -6,13 +6,14 @@ namespace Isometric
 
     public class ResourceManager
     {
+        // 만약 Load하려는게, Pooling되고있다면 해당 pool에서 꺼내오는게 무조건 효율적이므로 먼저 검사, 없다면 정말 Load한다.
         public T Load<T>(string filepath) where T: Object
         {
             if(typeof(T) == typeof(GameObject))
             {
                 string name = filepath;
                 int index = name.LastIndexOf("/");
-                Debug.Log(name);
+               // Debug.Log(name);
                 if (index > 0)
                     name = name.Substring(index + 1);
 
@@ -56,7 +57,7 @@ namespace Isometric
         {
             if(go == null)
             {
-                Debug.Log($"Failed to Destroy GameObject : {go.name}");
+                //Debug.Log($"Failed to Destroy GameObject : {go.name}");
                 return;
             }
 

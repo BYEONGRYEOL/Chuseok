@@ -86,7 +86,7 @@ public class Enums
         AttackLayer = 2,
         RunLayer = 3,
         HitDamageLayer = 4,
-        InterActionLayer = 5
+        BowLayer = 5
     }
     public enum Layer
     {
@@ -111,6 +111,7 @@ public class Enums
     }
 
 
+
     public enum UI
     {
         UI_Loading,
@@ -118,22 +119,42 @@ public class Enums
         UI_MainMenu,
         UI_Game
     }
+
+
     public enum Scene
     {
-        Unknown,
         SceneLoading,
-        SceneLogin,
         SceneMainMenu,
-        SceneGame
+        SceneGame,
+        SceneEnd,
+        SceneFailed,
+        SceneHowToPlay
     }
+
+
     //Sounds Enums
     public enum Sound
     {
         Bgm,
         Effect,
-        // EnumCount는 모든 Enum 형식에 마지막에 추가 될 요소로 enum 안의 요소의 총 개수를 파악하는 데 도움을 준다.
         EnumCount
     }
+
+    public enum BGM { 
+        BGM,
+        BGMCount
+    }
+
+    public enum SFX 
+    { 
+        Button,
+        Clear,
+        Money,
+        Opening,
+        TypeWriting,
+        SFXCount
+    }
+
 
     public enum UIEvent
     {

@@ -6,12 +6,11 @@ using UnityEngine;
  
 public class FadeInOut : MonoBehaviour
 {
-
+    // 플레이어가 나무 뒤로 들어가는 경우 나무가 투명해져서(alpha값 조절) 플레이어가 보일 수 있도록 하는 클래스
     public SpriteRenderer MySpriteRenderer { get; set; }
 
     private Color defaultColor;
     private Color fadedColor;
-
 
     public void FadeOut()
     {
@@ -33,15 +32,11 @@ public class FadeInOut : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("ontrigger enter");
-
+        //Debug.Log("ontrigger enter");
         if (collision.CompareTag("Player"))
         {
-
-            Debug.Log("player 충돌 인식");
+            //Debug.Log("player 충돌 인식");
             FadeOut();
-
-            
         }
     }
 
@@ -50,9 +45,6 @@ public class FadeInOut : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             FadeIn();
-
-          
-          
         }
     }
 }

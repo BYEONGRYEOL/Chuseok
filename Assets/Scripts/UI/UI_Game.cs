@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 namespace Isometric.UI
 {
@@ -11,41 +12,33 @@ namespace Isometric.UI
     {
 
         public UI_Option option;
-        public Image hp;
-        public TextMeshProUGUI hp_text;
+        public Image joyStick;
+        public TextMeshProUGUI moneyText;
+        public TextMeshProUGUI timeText;
+        public TextMeshProUGUI difficultyText;
+
         private float currentFill;
-        private float lerpSpeed = 2f;
         enum GameObjects
         {
-            StatGroup,
-            ActionButtons
-        }
-        enum Buttons
-        {
-            Btn_Action_1,
-            Btn_Action_2,
-            Btn_Action_3
-
+            StatGroup
         }
         enum Images
         {
-            Img_HP_Bar_BackGround,
-            Img_HP_Bar_FillArea,
+            JoyStick
         }
 
         enum TextMeshProUGUIs
         { 
-            Text_HP_Bar
+            Txt_Money,
+            Txt_Time,
+            Txt_Difficulty
         }
         private void Update()
         {
-            Update_HPBar();
-            
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                
-                Managers.UI.ShowPopupUI<UI_Option>();
-            }
+            //게임 진행 시간 빼고는 사실은 update가 아니라 콜백 형식으로 업데이트 해주는게 좋을 텐데 시간이 없어서 우선은...ㅠㅠ
+            moneyText.text = GameManagerEX.Instance.Money.ToString();
+            timeText.text = Math.Round(Managers.Time.PlayingTime, 1).ToString();
+            difficultyText.text = GameManagerEX.Instance.difficulty.ToString();
         }
 
         private void Awake()
@@ -56,28 +49,21 @@ namespace Isometric.UI
         {
             base.Init();
             
-
-            
-            Bind<Button>(typeof(Buttons));
             Bind<GameObject>(typeof(GameObjects));
             Bind<TextMeshProUGUI>(typeof(TextMeshProUGUIs));
             Bind<Image>(typeof(Images));
 
-            hp = GetImage((int)Images.Img_HP_Bar_FillArea);
-            hp_text = GetText((int)TextMeshProUGUIs.Text_HP_Bar);
-            BindEvent(GetButton((int)Buttons.Btn_Action_1).gameObject, PointerEventData => { });
-            
-        }
+            joyStick = GetImage((int)Images.JoyStick);
+            moneyText = GetText((int)TextMeshProUGUIs.Txt_Money);
+            timeText = GetText((int)TextMeshProUGUIs.Txt_Time); 
+            difficultyText = GetText((int)TextMeshProUGUIs.Txt_Difficulty);
 
-        private void Update_HPBar()
-        {
+            moneyText.text = "0";
             
-            if (currentFill != hp.fillAmount)
+            if(Managers.Data.gameData.IsMobile == false)
             {
-                hp.fillAmount = Mathf.Lerp(hp.fillAmount, currentFill, Time.deltaTime * lerpSpeed);
+                joyStick.gameObject.SetActive(false);
             }
         }
-        
     }
-
 }

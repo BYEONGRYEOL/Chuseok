@@ -16,7 +16,7 @@ namespace Isometric
         public void FindAllChildren(GameObject g)
         {
             SpriteRenderer[] allChildren = g.GetComponentsInChildren<SpriteRenderer>();
-            Debug.Log(allChildren.Length);
+            //Debug.Log(allChildren.Length);
             foreach (SpriteRenderer child in allChildren)
             {
                 child.gameObject.GetComponent<SpriteRenderer>().sortingOrder = this.GetComponent<TilemapRenderer>().sortingOrder;

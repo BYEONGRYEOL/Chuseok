@@ -7,6 +7,7 @@ namespace Isometric.UI
 
     public class UIManager
     {
+        // 씬에 나와야할 UI를 관리한다.
         int _sortOrder = 10;
 
         Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
@@ -67,6 +68,7 @@ namespace Isometric.UI
             return item;
 
         }
+        // 씬 이동시 자동으로 실행된다.
         public void CloseSceneUI(string name = null)
         {
             if (string.IsNullOrEmpty(name))
@@ -80,6 +82,7 @@ namespace Isometric.UI
             GameObject go = Root.transform.Find(name).gameObject;
             GameObject.Destroy(go);
         }
+        // 해당 씬에 맞는 씬UI를 로드함
         public T ShowSceneUI<T>(string name = null) where T : UI_Scene
         {
             if(SceneUI != null)
@@ -92,16 +95,15 @@ namespace Isometric.UI
             }
 
             GameObject go = Managers.Resource.Instantiate($"UI/Scene/{name}");
-            Debug.Log(name + "UI 생성");
+            //Debug.Log(name + "UI 생성");
             T scene = Util.GetOrAddComponent<T>(go);
             SceneUI = scene;
 
-            
             go.transform.SetParent(Root.transform);
-
             
             return scene;
         }
+        // 팝업
         public T ShowPopupUI<T>(bool duplicatable = true, string name = null) where T : UI_Popup
         {
             if (string.IsNullOrEmpty(name))
@@ -136,7 +138,7 @@ namespace Isometric.UI
 
             if(_popupStack.Peek() != popup)
             {
-                Debug.Log("Close late Popup Failed!"); 
+                //Debug.Log("Close late Popup Failed!"); 
             }
 
             ClosePopupUI();

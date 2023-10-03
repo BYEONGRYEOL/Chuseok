@@ -21,7 +21,7 @@ namespace Isometric
         // Start is called before the first frame update
         void Start()
         {
-            Debug.Log("SpriteManager scripts :: Start Function run");
+            //Debug.Log("SpriteManager scripts :: Start Function run");
 
             plant = transform.GetChild(0).GetComponent<SpriteRenderer>();
             plantCollider = transform.GetChild(0).GetComponent<BoxCollider2D>();
@@ -54,7 +54,7 @@ namespace Isometric
         }
         void PlantTree()
         {
-            Debug.Log("SpriteManager scripts :: PlantTree Function run");
+            //Debug.Log("SpriteManager scripts :: PlantTree Function run");
             if (IsPlanted) // false
             {
                 if (plantStage == selectedPlant.plantStages.Length - 1)
@@ -77,7 +77,7 @@ namespace Isometric
 
         void Plant()
         {
-            Debug.Log("SpriteManager scripts :: Plant Function run");
+            //Debug.Log("SpriteManager scripts :: Plant Function run");
 
             IsPlanted = true;
             plantStage = 0;

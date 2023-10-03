@@ -5,7 +5,7 @@ using System;
 namespace Isometric.Utility
 {
 
-    public class SoundManager : SingletonDontDestroyMonobehavior<SoundManager>
+    public class SoundManager
     {
         AudioSource[] audioSources = new AudioSource[(int)Enums.Sound.EnumCount];
 
@@ -15,27 +15,43 @@ namespace Isometric.Utility
         }
         public void Init()
         {
-            // Sound Enum에 존재하는 음악 종류에 대하여 for문 반복으로 게임오브젝트 생성
-            // 3D sound를 구현하지 않는 한 최대한의 동시재생 음원 수와 같아야 의미가 맞는다.
-            string[] soundNames = System.Enum.GetNames(typeof(Enums.Sound));
-            for (int i=0; i< soundNames.Length - 1; i++)
+            // 배경음악과, 효과음 두개의 오디오소스를 생성한다.
+            GameObject root = GameObject.Find("@Sound");
+            if (root == null)
             {
-                GameObject go = new GameObject { name = soundNames[i] };
-                audioSources[i] = go.AddComponent<AudioSource>();
-                go.transform.parent = this.transform;
+                root = new GameObject { name = "@Sound" };
+                UnityEngine.Object.DontDestroyOnLoad(root);
+
+                string[] soundNames = Enum.GetNames(typeof(Enums.Sound));
+                for(int i = 0; i < soundNames.Length - 1; i++)
+                {
+                    GameObject go = new GameObject { name = soundNames[i] };
+                    // 주의할 점은 동적 할당만 해준다고 되는게 아니라, 유니티 컴포넌트이기때문에, 아래 코드가 필수이다.
+                    audioSources[i] = go.AddComponent<AudioSource>();
+                    go.transform.parent = root.transform;
+                }
+
+                audioSources[(int)Enums.Sound.Bgm].loop = true;
             }
 
-            //bgm 무한재생
-            audioSources[(int)Enums.Sound.Bgm].loop = true;
+
+
         }
 
-        public void Play(AudioClip audioClip, Enums.Sound type = Enums.Sound.Effect, float pitch = 1.0f)
+        // 이름을 입력받아 해당 이름을 리소스 디렉토리에서 찾아 재생하는 함수,
+        public void Play(string name, Enums.Sound type = Enums.Sound.Effect, float pitch = 1.0f)
         {
-            if (audioClip == null)
-                return;
-
+            
             if(type == Enums.Sound.Bgm)
             {
+                AudioClip audioClip = Resources.Load<AudioClip>("BGM/" + name);
+                if (audioClip == null)
+                {
+                    Debug.Log("audioclip null");
+                    return;
+                }
+
+
                 AudioSource audioSource = audioSources[(int)Enums.Sound.Bgm];
                 if (audioSource.isPlaying)
                 {
@@ -46,14 +62,21 @@ namespace Isometric.Utility
                 audioSource.clip = audioClip;
                 audioSource.Play();
             }
-            else if(type == Enums.Sound.Effect)
+            else
             {
-                AudioSource audioSource = audioSources[(int)Enums.Sound.Effect];
+                AudioClip audioClip = Resources.Load<AudioClip>("SFX/" + name);
+                AudioSource audioSource = audioSources[(int)type];
                 audioSource.pitch = pitch;
                 audioSource.PlayOneShot(audioClip);
             }
         }
+        // 현재 재생중인 효과음을 멈추는 함수
+        public void StopSFX()
+        {
+            audioSources[(int)Enums.Sound.Effect].Stop();
+        }
 
+        // 다른 씬으로 이동하거나 할때 오디오소스들의 클립을 모두 지우는 함수
         public void Clear()
         {
             foreach(AudioSource audioSource in audioSources)
@@ -63,6 +86,27 @@ namespace Isometric.Utility
             }
         }
         
+        //
+        public void MuteAll()
+        {
+            // 현재 mute되어있다면
+            if(audioSources[(int)Enums.Sound.Effect].mute || audioSources[(int)Enums.Sound.Bgm].mute)
+            {
+                //mute 해제
+                audioSources[(int)Enums.Sound.Effect].mute = false;
+                audioSources[(int)Enums.Sound.Bgm].mute = false;
+            }
+            else
+            {
+                // 아니면 mute하자
+                foreach (AudioSource audioSource in audioSources)
+                {
+                    audioSource.mute = true;
+                }
+            }
+            
+
+        }
     }
 
 }

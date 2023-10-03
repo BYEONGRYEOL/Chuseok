@@ -1,18 +1,19 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Isometric.Utility;
 using UnityEngine.UI;
 namespace Isometric
 {
-
     public class CursorController : SingletonMonoBehaviour<CursorController>
     {
+        // í•™ìƒ ë•Œ ë§Œë“¤ë˜ í† ì´ í”„ë¡œì íŠ¸ì— ì“°ì¸ ì½”ë“œ ê·¸ëŒ€ë¡œ, ë§ˆìš°ìŠ¤ ì»¤ì„œ ì»¨íŠ¸ë¡¤ëŸ¬ë¡œì¨
+        // UIìƒ ì•„ì´í…œ ë“œë˜ê·¸, í´ë¦­ ë“±ì— ë”°ë¼ ê¸°ëŠ¥ê³¼ ë§ˆìš°ìŠ¤ ì»¤ì„œ Icon Sprite ë³€ê²½í•˜ëŠ” ê¸°ëŠ¥
+        // ì½”ìœ¡ëŒ€ì—ì„  ì‚¬ìš©í•˜ì§€ì•ŠëŠ”ë‹¤.
         int mask = (1 << (int)Enums.Layer.InterActive);
         // Start is called before the first frame update
         Image grabbingImage;
         Texture2D idleIcon;
-        Texture2D grabIcon;
         Camera main;
 
         private Vector3 iconOriginPosition;
@@ -32,59 +33,20 @@ namespace Isometric
         }
         void Init()
         {
-            idleIcon = Managers.Resource.Load<Texture2D>("Texture/Cursor/Cursor_Idle");
-            grabIcon = Managers.Resource.Load<Texture2D>("Texture/Cursor/Cursor_Grab");
-            main = Camera.main;
             grabbingImage = null;
             IsGrabbing = false;
         }
 
-        void Update()
+        private void Update()
         {
             UpdateCursor();
         }
-
-        public void GraphicRaycaseTest()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-
-            }
-        }
-        public void OnItemBeginDrag(Image image)
-        {
-            grabbingImage = Instantiate(image, image.transform.parent);
-            Cursor.SetCursor(grabIcon, new Vector2(grabIcon.width / 4, grabIcon.height / 4), CursorMode.Auto);
-            //icon.color = new Color(icon.color.r, icon.color.g, icon.color.b, 0.5f;
-            //GraphicRaycast ¿¡¼­ µÚ¿¡ ÀÖ´Â UI ÄÄÆ÷³ÍÆ®¸¦ ÀÎ½ÄÇÏÁö ¸øÇÏ´Â ¿À·ù°¡ ³ª±â ¶§¹®¿¡ Àá½Ã grabbingImage¸¦ GRÀÌ ÀÎ½ÄÇÏÁö ¸øÇÏµµ·Ï raycast target false
-            grabbingImage.GetComponent<Image>().raycastTarget = false;
-            iconOriginPosition = grabbingImage.transform.position;
-
-
-        }
-        public void OnItemDrag(Image image)
-        {
-            //Àâ°íÀÖ´ø ¸¶¿ì½º¸¦ ¶¼¸é ¸®ÅÏ
-            
-            grabbingImage.transform.position = Input.mousePosition;
-            if (Input.GetMouseButtonUp(0))
-                OnItemEndDrag(image);
-        }
-        public void OnItemEndDrag(Image image)
-        {
-            //Drgging Á¾·á½Ã ¿øÀ§Ä¡, µå·¡±×ÇÏ´Âµ¿¾È ²°´ø racasttarget ´Ù½Ã true
-
-            grabbingImage.GetComponent<Image>().raycastTarget = true;
-            grabbingImage.transform.position = iconOriginPosition;
-            grabbingImage = null;
-        }
+        
         void UpdateCursor()
         {
-            
+
             if (Input.GetMouseButton(0))
                 return;
-
-
             Ray ray = main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100f, mask))
