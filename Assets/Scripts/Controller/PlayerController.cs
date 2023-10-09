@@ -82,37 +82,6 @@ namespace Isometric
                         myAnimator.SetBool("isBowing", true);
                         break;
 
-
-                    #region legacy
-                    // 아래는 현재 코육대 프로젝트에는 사용되진 않지만 오류 수정 등이 오래걸려 제출 기한때문에 어쩔수 없이
-
-                    case Enums.CharacterState.Attack_1:
-                        ActivateAnimationLayer(Enums.AnimationLayer.AttackLayer);
-                        myAnimator.SetBool("isAttacking", true);
-                        myAnimator.SetInteger("attackCount", 1);
-                        break;
-                    case Enums.CharacterState.TakeDamage:
-                        ActivateAnimationLayer(Enums.AnimationLayer.HitDamageLayer);
-                        Enter_TakeDamage();
-                        break;
-                    //우선은 플레이어 전용
-                    case Enums.CharacterState.Attack_2:
-                        myAnimator.SetInteger("attackCount", 2);
-                        break;
-
-                    case Enums.CharacterState.Attack_3:
-                        myAnimator.SetInteger("attackCount", 3);
-                        break;
-
-                    case Enums.CharacterState.Attack_Jump:
-                        break;
-
-                    case Enums.CharacterState.Attack_Run:
-                        break;
-
-                    case Enums.CharacterState.Runaway:
-                        break;
-                        #endregion
                 }
             }
         }
@@ -271,14 +240,6 @@ namespace Isometric
             }
         }
 
-        #region legacy
-        protected void Enter_TakeDamage()
-        {
-            //공격받아 딜레이 중
-            Managers.Time.SetTimer(0.5f, () => State = Enums.CharacterState.Idle );
-        }
-        #endregion 
-
 
         #region Update_state
         protected void Update_TakeDamage()
@@ -289,7 +250,6 @@ namespace Isometric
         
         protected  void Update_Idle()
         {
-
             if(originalDirection.sqrMagnitude > 0)
             {
                // Debug.Log("idle 상태에서 이동 감지");
@@ -337,11 +297,12 @@ namespace Isometric
         #region Input
         private void OnKeyboard()
         {
-            // GetKeyUp을 상단에 위치시켜야 눌렀다가 뗄 때 버그가 없다
+
             if (Input.GetKeyUp(KeyCode.K))
-                StopInterAction();
+                InterActionCancel();
             if (Input.GetKeyDown(KeyCode.K))
                 InterAction();
+            // GetKeyUp을 상단에 위치시켜야 눌렀다가 뗄 때 버그가 없다
             if (Input.GetKeyUp(KeyCode.LeftShift))
                 RunningCancel();
             if (Input.GetKey(KeyCode.LeftShift))
@@ -425,26 +386,31 @@ namespace Isometric
         }
 
 
-        #region GetAttacked
-
-
-        #endregion
 
         public void InterAction()
         {
+            // 제자리 절 버그 방지위해 이동중일때만 절가능
+            if (State != Enums.CharacterState.Move && State != Enums.CharacterState.Run)
+                return;
             // 현재 상태를 상호작용 중으로 변경하고,
             State = Enums.CharacterState.Interaction;
-            //Debug.Log("절");
             InterActionBox_Location_Set(); // 할머니 검사 레이어 위치 조정
             InterAction_Activate(); // 상호작용 박스 활성화
         }
-        
+
+        public void InterActionCancel()
+        {
+            Debug.Log("절 취소");
+            myAnimator.SetBool("isBowing", false);
+            State = Enums.CharacterState.Move;
+            InterActionBox_Disable();
+        }
+
+
         public void Running()
         {
-            
             if (State != Enums.CharacterState.Idle && State != Enums.CharacterState.Move)
                 return;
-
             State = Enums.CharacterState.Run;
         }
 
@@ -458,13 +424,7 @@ namespace Isometric
         }
 
 
-        public void StopInterAction()
-        {
-            //Debug.Log("절 취소");
-            myAnimator.SetBool("isBowing", false);
-            State = Enums.CharacterState.Idle;
-            InterActionBox_Disable();
-        }
+        
         public void ActivateAnimationLayer(Enums.AnimationLayer layerName)
         {
             // 모든 레이어의 무게값을 0 으로 만들어 줍니다.

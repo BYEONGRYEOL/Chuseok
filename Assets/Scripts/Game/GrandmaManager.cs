@@ -104,13 +104,13 @@ namespace Isometric
 
         public bool OverLine_DL(float x, float y)
         {
-            if (x * -0.5 + 2 < y)
+            if (x * -0.5 + 4 < y)
                 return true;
             return false;
         }
         public bool OverLine_DR(float x, float y)
         {
-            if (x * ((float)-13 / 28) + 2 < y)
+            if (x * ((float)-13 / 28) + 4 < y)
                 return true;
             return false;
         }

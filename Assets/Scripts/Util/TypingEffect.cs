@@ -9,7 +9,7 @@ namespace Isometric
     public class TypingEffect : MonoBehaviour
     {
         public TextMeshProUGUI tx;
-        public string TypingString = "엄마는 내가 캐쉬를 환불한줄 안다.\n @1원 남았으니까 이걸로 @2 사야지~~";
+        public string TypingString = "@3초만에 집에 돌아왔다! \n엄마는 내가 캐쉬를 환불한줄 안다.\n @1원 남았으니까 이걸로 @2 사야지~~";
         
         void Start()
         {

@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using Isometric.Data;
 using Isometric.Utility;
+using System;
 
 namespace Isometric.UI
 {
@@ -56,10 +57,11 @@ namespace Isometric.UI
 
         public void SetFailedText()
         {
+            string time = Math.Round(Managers.Time.PlayingTime, 1).ToString();
 
             int money = GameManagerEX.Instance.Money;
             Get<GameObject>((int)GameObjects.TypingEffect).GetComponent<TypingEffect>().TypingString =
-                "송편의 맛을 알아버린 나는, \n집에 돌아가는 것을 포기했다. \n열심히 모은 " + money.ToString() + "원으로 송편이나 사먹어야지~";
+                "송편의 맛을 알아버린 나는, \n"+time+"초만에 집에 돌아가는 것을 포기했다. \n열심히 모은 " + money.ToString() + "원으로 송편이나 사먹어야지~";
         }
     }
 

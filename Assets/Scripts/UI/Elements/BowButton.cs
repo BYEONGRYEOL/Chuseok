@@ -28,7 +28,7 @@ namespace Isometric
         }
         public void OnPinterUp()
         {
-            PlayerController.Instance.StopInterAction();
+            PlayerController.Instance.InterActionCancel();
 
         }
     }

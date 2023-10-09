@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using Isometric.Data;
 using Isometric.Utility;
+using System;
 
 namespace Isometric.UI
 {
@@ -45,6 +46,7 @@ namespace Isometric.UI
         public void SetEndingText()
         {
             int money = GameManagerEX.Instance.Money;
+            string time = Math.Round(Managers.Time.PlayingTime, 1).ToString();
             string moneyString = money.ToString();
 
             string[] endingThings = {"과자", "치킨", "캐쉬나 더", "컴퓨터" };
@@ -52,10 +54,11 @@ namespace Isometric.UI
             if(money < 300000)
             {
                 Get<GameObject>((int)GameObjects.TypingEffect).GetComponent<TypingEffect>().TypingString =
-                    "용돈을 30만원 받았는데 왜 " + moneyString + "원 밖에 없냐고 쫓겨났다.. 집에 가고싶어ㅠㅠㅠ";
+                    "용돈을 30만원 받았는데 왜 " + moneyString + "원 밖에 없냐고 쫓겨났다.. \n" + time+"초 동안이나 쫓겨나 있어서 집에 가고싶어ㅠㅠㅠ";
                 return;
             }
-            
+            else
+                Get<GameObject>((int)GameObjects.TypingEffect).GetComponent<TypingEffect>().TypingString = "@3초만에 집에 돌아왔다! \n엄마는 내가 캐쉬를 환불한줄 안다.\n @1원 남았으니까 이걸로 @2 사야지~~";
 
             if (money - 300000 >= 1000000)
                 endingThingIndex = 3;
@@ -70,6 +73,8 @@ namespace Isometric.UI
 
             Get<GameObject>((int)GameObjects.TypingEffect).GetComponent<TypingEffect>().TypingString.Replace("@1", moneyString);
             Get<GameObject>((int)GameObjects.TypingEffect).GetComponent<TypingEffect>().TypingString.Replace("@2", endingThings[endingThingIndex]);
+            Get<GameObject>((int)GameObjects.TypingEffect).GetComponent<TypingEffect>().TypingString.Replace("@3", time);
+
 
 
         }

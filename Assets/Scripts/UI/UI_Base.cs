@@ -14,7 +14,6 @@ namespace Isometric.UI
     {
 
         // UnityEngine.Object는 유니티 엔진에서 모든 오브젝트와 컴포넌트들의 부모클래스, 그니까 조상이다.
-        // 그말인 즉슨 뭐든간에 이 Dictionary에 담아서 관리할 수 있다.
         protected Dictionary<Type, UnityEngine.Object[]> objects = new Dictionary<Type, UnityEngine.Object[]>();
         protected void Bind<T>(Type type) where T : UnityEngine.Object
         {
